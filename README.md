@@ -7,7 +7,8 @@
 - One database
 - One webservice
 - One cronjob service
-- We run this once a day
+- We run this once a day, but aggregate to monthly so far
+- Forks and Merges sadly can't be retrieved for older dates and tracking will start in August 2023
 - Feel free to suggest changes/ addition, we can't guarantee how time we will put into this
 - Also feel free to use, but please mind that this is not thoroughly tested code
 
