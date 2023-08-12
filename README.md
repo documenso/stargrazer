@@ -15,3 +15,8 @@
 # Endpoints
 - /api/poll: Trigger datapoint collection for this moment
 - /api/stat: Get a monthly aggregated timeline of previously collected stats. Highest value for month is used.
+
+## Example Data for /stats:
+```
+{"2023-8":{"stars":2465,"forks":150,"openIssues":66},"2023-7":{"stars":2250,"forks":0,"openIssues":0},"2023-6":{"stars":2070,"forks":0,"openIssues":0},"2023-5":{"stars":1260,"forks":0,"openIssues":0},"2023-4":{"stars":90,"forks":0,"openIssues":0},"2023-3":{"stars":0,"forks":0,"openIssues":0}}
+```
