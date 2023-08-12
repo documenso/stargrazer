@@ -1,5 +1,5 @@
 ```
-🦺 This is experimental code, that has not been tested exetensively.
+🦺 This is experimental code, that has not been tested extensively.
 ```
 
 - We are running this on render.com
