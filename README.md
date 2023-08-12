@@ -1,4 +1,4 @@
-# Stargrazer - GitHub Stats Collector/ Aggreator
+# StarGrazer - GitHub Stats Collector/ Aggreator
 ```
 🦺 This is experimental code, that has not been tested extensively.
 ```
