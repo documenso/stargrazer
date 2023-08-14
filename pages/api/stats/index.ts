@@ -21,6 +21,7 @@ interface Stat {
   time: Date;
   stars: number;
   forks: number;
+  mergedPRs: number;
   openIssues: number;
 }
 
@@ -28,6 +29,7 @@ interface GroupedStats {
   [key: string]: {
     stars: number;
     forks: number;
+    mergedPRs: number;
     openIssues: number;
   };
 }
@@ -43,11 +45,13 @@ function groupMetricsByMonth(stats: Stat[]): GroupedStats {
       result[key] = {
         stars: stat.stars,
         forks: stat.forks,
+        mergedPRs: stat.mergedPRs,
         openIssues: stat.openIssues,
       };
     } else {
       result[key].stars = Math.max(result[key].stars, stat.stars);
       result[key].forks = Math.max(result[key].forks, stat.forks);
+      result[key].mergedPRs = Math.max(result[key].mergedPRs, stat.mergedPRs);
       result[key].openIssues = Math.max(
         result[key].openIssues,
         stat.openIssues

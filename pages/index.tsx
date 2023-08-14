@@ -11,6 +11,7 @@ export default function IndexPage(props: {
     time: Date;
     stars: number;
     forks: number;
+    mergedPRs: number;
     openIssues: number;
   }[];
 }) {
@@ -23,7 +24,8 @@ export default function IndexPage(props: {
       {props?.stats.map((stat) => (
         <div className={inter.className} key={JSON.stringify(stat.time)}>
           <b>{new Date(stat.time).toDateString()}</b> - {stat.stars} Stars,{" "}
-          {stat.forks} Forks, {stat.openIssues} Open Issues
+          {stat.forks} Forks, {stat.openIssues} Open Issues, Merged PRs:{" "}
+          {stat.mergedPRs}
         </div>
       ))}
     </>

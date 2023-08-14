@@ -11,9 +11,10 @@ datasource db {
 }
 
 model GitHubStats {
-  id    Int      @id @default(autoincrement())
-  time  DateTime
-  stars Int
-  forks Int
-  openIssues Int
+  id         Int      @id @default(autoincrement())
+  time       DateTime
+  stars      Int      @default(0)
+  forks      Int      @default(0)
+  mergedPRs  Int      @default(0)
+  openIssues Int      @default(0)
 }
