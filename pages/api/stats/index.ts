@@ -11,7 +11,7 @@ export default async function getHandler(
       orderBy: { time: "desc" },
     });
 
-    res.status(200).json(groupMetricsByMonth(stats.reverse()));
+    res.status(200).json(groupMetricsByMonth(stats));
   } catch (error: any) {
     console.error("Error fetching repository info:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
