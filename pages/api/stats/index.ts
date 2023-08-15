@@ -7,7 +7,7 @@ export default async function getHandler(
   res: NextApiResponse
 ) {
   try {
-    const stats: Stat[] = await prisma.gitHubStats.findMany();
+    const stats: Stat[] = await prisma.gitHubStats.findMany({orderBy: {time: 'asc'}});
 
     res.status(200).json(groupMetricsByMonth(stats));
   } catch (error: any) {
