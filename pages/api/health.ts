@@ -7,7 +7,7 @@ export default async function getHandler(
   res: NextApiResponse
 ) {
   try {
-    const stats = await prisma.gitHubStats.findMany();
+    const stats = await prisma.gitHubStats.findFirstOrThrow();
 
     return res.status(200).send("API healthy :)");
   } catch (error: any) {
