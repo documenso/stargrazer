@@ -40,9 +40,6 @@ function getNewestStatsPerMonth(stats: Stat[]): GroupedStats {
     if (!(key in groupedStats) || stat.time > groupedStats[key].time) {
       groupedStats[key] = stat;
     }
-
-    delete groupedStats[key]["id"];
-    delete groupedStats[key]["time"];
   });
 
   return groupedStats;
