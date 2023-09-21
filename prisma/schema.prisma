@@ -15,3 +15,9 @@ model GitHubStats {
   openIssues Int      @default(0)
   mergedPRs  Int      @default(0)
 }
+
+model StripeStats {
+  id         Int      @id @default(autoincrement())
+  time       DateTime
+  earlyAdopters      Int      @default(0)
+}
