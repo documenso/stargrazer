@@ -62,6 +62,7 @@ async function getCountOfActiveSubscriptions() {
     // List all currently active subscriptions
     const subscriptions = await stripe.subscriptions.list({
       status: "active",
+      limit: 1000,
     });
 
     // Iterate through subscriptions and check if they contain the specified products
