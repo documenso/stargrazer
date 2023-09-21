@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -15,6 +12,6 @@ model GitHubStats {
   time       DateTime
   stars      Int      @default(0)
   forks      Int      @default(0)
-  mergedPRs  Int      @default(0)
   openIssues Int      @default(0)
+  mergedPRs  Int      @default(0)
 }
