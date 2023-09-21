@@ -10,9 +10,9 @@ export default async function getHandler(
       orderBy: { time: "desc" },
     });
 
-    res.status(200).json(groupMetricsByMonth(stripeStats));
+    res.status(200).json(getNewestStatsPerMonth(stripeStats));
   } catch (error: any) {
-    console.error("Error fetching repository info:", error.message);
+    console.error("Error fetching info:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
   }
 }
@@ -29,26 +29,23 @@ interface GroupedStats {
   };
 }
 
-function groupMetricsByMonth(stats: Stat[]): GroupedStats {
-  return stats.reduce((result: GroupedStats, stat: Stat) => {
+function getNewestStatsPerMonth(stats: Stat[]): GroupedStats {
+  const groupedStats: { [key: string]: Stat } = {};
+
+  stats.forEach((stat) => {
     const year = stat.time.getFullYear();
     const month = stat.time.getMonth() + 1;
-
     const key = `${year}-${month}`;
 
-    if (!result[key]) {
-      result[key] = {
-        earlyAdopters: stat.earlyAdopters,
-      };
-    } else {
-      result[key].earlyAdopters = Math.max(
-        result[key].earlyAdopters,
-        stat.earlyAdopters
-      );
+    if (!(key in groupedStats) || stat.time > groupedStats[key].time) {
+      groupedStats[key] = stat;
     }
 
-    return result;
-  }, {});
+    delete groupedStats[key]["id"];
+    delete groupedStats[key]["time"];
+  });
+
+  return groupedStats;
 }
 
 interface StripeStat {
