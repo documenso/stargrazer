@@ -81,6 +81,7 @@ async function getCountOfActiveSubscriptions() {
 
     return activeSubscriptionsCount;
   } catch (error) {
+    console.error("Error retrieving active subscriptions:", error);
     throw error;
   }
 }
