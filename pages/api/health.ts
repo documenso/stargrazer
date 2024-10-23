@@ -1,11 +1,8 @@
 import axios from "axios";
-import { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "../../prisma/prisma";
 
-export default async function getHandler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function getHandler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const stats = await prisma.gitHubStats.findFirstOrThrow();
 

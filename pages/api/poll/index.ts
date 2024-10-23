@@ -10,22 +10,25 @@ const stripe = new Stripe(process.env.STRIPE_KEY || "", {
 export default async function getHandler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const generalStats = await axios.get("https://api.github.com/repos/documenso/documenso");
-
     const earlyAdopters = await getCountOfActiveSubscriptions();
     const mergedPRs = await axios.get(
       "https://api.github.com/search/issues?q=repo:documenso/documenso/+is:pr+merged:>=2010-01-01&page=0&per_page=1"
     );
+    const openIssues = await axios.get(
+      "https://api.github.com/search/issues?q=repo:documenso/documenso+type:issue+state:open&page=0&per_page=1"
+    );
 
-    const { stargazers_count, forks_count, open_issues_count, open_issues } = generalStats.data;
-    const { total_count } = mergedPRs.data;
+    const { stargazers_count, forks_count } = generalStats.data;
+    const { total_count: mergedPRCount } = mergedPRs.data;
+    const { total_count: openIssuesCount } = openIssues.data;
 
     await prisma.gitHubStats.create({
       data: {
         time: new Date(),
         stars: stargazers_count,
         forks: forks_count,
-        openIssues: open_issues,
-        mergedPRs: total_count,
+        openIssues: openIssuesCount,
+        mergedPRs: mergedPRCount,
       },
     });
 
@@ -39,7 +42,7 @@ export default async function getHandler(req: NextApiRequest, res: NextApiRespon
     res
       .status(200)
       .json(
-        `Polled: {stars: ${stargazers_count},forks: ${forks_count}},openIssues ${open_issues}},mergedPRs: ${total_count}},earlyAdopters: ${earlyAdopters}}`
+        `Polled: {stars: ${stargazers_count}, forks: ${forks_count}, openIssues: ${openIssuesCount}, mergedPRs: ${mergedPRCount}, earlyAdopters: ${earlyAdopters}}`
       );
   } catch (error: any) {
     console.error("Error fetching repository info:", error.message);
